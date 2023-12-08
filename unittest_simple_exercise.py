@@ -5,31 +5,34 @@ import unittest
 
 def script(lnk):
     browser = webdriver.Chrome()
-    browser.get(lnk)
+    try:
+        browser.get(lnk)
 
-    input_first_name = browser.find_element(By.CSS_SELECTOR, ".first:required")
-    input_last_name = browser.find_element(By.CSS_SELECTOR, ".second:required")
-    input_email = browser.find_element(By.CSS_SELECTOR, ".third:required")
+        input_first_name = browser.find_element(By.CSS_SELECTOR, ".first:required")
+        input_last_name = browser.find_element(By.CSS_SELECTOR, ".second:required")
+        input_email = browser.find_element(By.CSS_SELECTOR, ".third:required")
 
-    input_first_name.send_keys("Biba")
-    input_last_name.send_keys("Bobav")
-    input_email.send_keys("fhdfjvkjcv@jgjf.d")
+        input_first_name.send_keys("Biba")
+        input_last_name.send_keys("Bobav")
+        input_email.send_keys("fhdfjvkjcv@jgjf.d")
 
-    # Отправляем заполненную форму
-    button = browser.find_element(By.CSS_SELECTOR, "button.btn")
-    button.click()
+        # Отправляем заполненную форму
+        button = browser.find_element(By.CSS_SELECTOR, "button.btn")
+        button.click()
 
-    # Проверяем, что смогли зарегистрироваться
-    # ждем загрузки страницы
-    time.sleep(1)
+        # Проверяем, что смогли зарегистрироваться
+        # ждем загрузки страницы
+        time.sleep(1)
 
-    # находим элемент, содержащий текст
-    welcome_text_elt = browser.find_element(By.TAG_NAME, "h1")
-    # записываем в переменную welcome_text текст из элемента welcome_text_elt
-    welcome_text = welcome_text_elt.text
-
+        # находим элемент, содержащий текст
+        welcome_text_elt = browser.find_element(By.TAG_NAME, "h1")
+        # записываем в переменную welcome_text текст из элемента welcome_text_elt
+        welcome_text = welcome_text_elt.text
+    finally:
+        browser.quit()
+        return welcome_text
     # с помощью assert проверяем, что ожидаемый текст совпадает с текстом на странице сайта
-    return welcome_text
+
 
 
 class TestSanity(unittest.TestCase):
@@ -45,3 +48,5 @@ class TestSanity(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+# python -m pytest unittest_simple_exercise.py | python -m unittest unittest_simple_exercise.py
