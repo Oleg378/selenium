@@ -30,6 +30,7 @@ def browser(request):
     print("\nquit browser..")
     browser.quit()
 
+
 # In order to pick between firefox and chrome you need write:
 # pytest -s -v --browser_name=chrome filename.py
 # pytest -s -v --browser_name=firefox filename.py
