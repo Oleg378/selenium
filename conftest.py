@@ -2,6 +2,8 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 
@@ -20,7 +22,7 @@ def browser(request):
     browser = None
     if browser_name == "chrome":
         print("\nstart chrome browser for test..")
-        browser = webdriver.Chrome()
+        browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     elif browser_name == "firefox":
         print("\nstart firefox browser for test..")
         browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
